@@ -26,5 +26,5 @@ jobs:
 
 ## Build
 ```shell
-npm run build &&  npm run package
+npm run build && npm run package
 ```
