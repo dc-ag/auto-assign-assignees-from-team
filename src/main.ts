@@ -26,10 +26,13 @@ export async function run() {
       org: org,
       team_slug: team,
     });
-    console.log("Request Status for getting team members:" + members.status);
+    console.log("Request Status for getting team members: " + members.status);
     // filter out PR author
     let memberNames = members.data.map((a) => a.login);
-    console.log("Picking reviewer from members:", memberNames);
+    console.log(
+      "Picking " + amount + " assignee(s) from members: ",
+      memberNames
+    );
 
     let finalAssignees: string[] = [];
 
@@ -46,19 +49,23 @@ export async function run() {
     }
 
     if (finalAssignees.length > 0) {
-      const personResponse = await repoClient.rest.issues.addAssignees({
+      const assigneeResponse = await repoClient.rest.issues.addAssignees({
         owner: issue.owner,
         repo: issue.repo,
         issue_number: issue.number,
         assignees: finalAssignees,
       });
       console.log(
-        "Request Status:" +
-          personResponse.status +
-          ", Assignees from Team " +
+        "Request Status for setting assigning assignees: " +
+          assigneeResponse.status
+      );
+      console.log(
+        "Assignees from Team '" +
           team +
-          ":" +
-          personResponse?.data?.assignees?.map((r) => r.login).join(",")
+          "' for issue " +
+          issue.number +
+          ": " +
+          assigneeResponse?.data?.assignees?.map((r) => r.login).join(",")
       );
     } else {
       console.log("No members to assign found in team " + team);
