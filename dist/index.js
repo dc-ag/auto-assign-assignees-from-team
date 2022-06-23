@@ -48,6 +48,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const repoToken = core.getInput("repo-token", { required: true });
+            const readToken = core.getInput("read-token", { required: true });
             const team = core.getInput("team");
             const org = core.getInput("org");
             const amount = parseInt(core.getInput("amount"));
@@ -57,8 +58,9 @@ function run() {
                 return;
             }
             // See https://octokit.github.io/rest.js/
-            const client = github.getOctokit(repoToken);
-            const members = yield client.rest.teams.listMembersInOrg({
+            const repoClient = github.getOctokit(repoToken);
+            const readClient = github.getOctokit(readToken);
+            const members = yield readClient.rest.teams.listMembersInOrg({
                 org: org,
                 team_slug: team,
             });
@@ -80,7 +82,7 @@ function run() {
                 }
             }
             if (finalAssignees.length > 0) {
-                const personResponse = yield client.rest.pulls.requestReviewers({
+                const personResponse = yield repoClient.rest.pulls.requestReviewers({
                     owner: issue.owner,
                     repo: issue.repo,
                     pull_number: issue.number,

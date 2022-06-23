@@ -5,6 +5,7 @@ import * as github from "@actions/github";
 export async function run() {
   try {
     const repoToken = core.getInput("repo-token", { required: true });
+    const readToken = core.getInput("read-token", { required: true });
     const team = core.getInput("team");
     const org = core.getInput("org");
     const amount = parseInt(core.getInput("amount"));
@@ -18,9 +19,10 @@ export async function run() {
     }
 
     // See https://octokit.github.io/rest.js/
-    const client = github.getOctokit(repoToken);
+    const repoClient = github.getOctokit(repoToken);
+    const readClient = github.getOctokit(readToken);
 
-    const members = await client.rest.teams.listMembersInOrg({
+    const members = await readClient.rest.teams.listMembersInOrg({
       org: org,
       team_slug: team,
     });
@@ -44,7 +46,7 @@ export async function run() {
     }
 
     if (finalAssignees.length > 0) {
-      const personResponse = await client.rest.pulls.requestReviewers({
+      const personResponse = await repoClient.rest.pulls.requestReviewers({
         owner: issue.owner,
         repo: issue.repo,
         pull_number: issue.number,

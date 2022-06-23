@@ -16,9 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Assign assignees from team"
-        uses: dc-ag/auto-assign-assignees-from-team@v1.0.2
+        uses: dc-ag/auto-assign-assignees-from-team@v1.0.3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          read-token: ${{ secrets.GITHUB_READ_TOKEN }} # Read only token which needs access to fetch team members
           org: "org" # organization containing the team
           team: "team" # the team name
           amount: 0 # amount of assignees to assign from the given team, 0 to assign all. If the amount exceeds the member count of the team all members will be added
