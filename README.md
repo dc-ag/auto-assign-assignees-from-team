@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Assign assignees from team"
-        uses: dc-ag/auto-assign-assignees-from-team@v1.0.1
+        uses: dc-ag/auto-assign-assignees-from-team@v1.0.2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           org: "org" # organization containing the team
