@@ -5,7 +5,7 @@ import * as github from "@actions/github";
 export async function run() {
   try {
     const repoToken = core.getInput("repo-token", { required: true });
-    const team = core.getInput("teams");
+    const team = core.getInput("team");
     const org = core.getInput("org");
     const amount = parseInt(core.getInput("amount"));
 
