@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Assign assignees from team"
-        uses: dc-ag/auto-assign-assignees-from-team@v1.0.3
+        uses: dc-ag/auto-assign-assignees-from-team@v1.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           read-token: ${{ secrets.GITHUB_READ_TOKEN }} # Read only token which needs access to fetch team members

@@ -82,18 +82,18 @@ function run() {
                 }
             }
             if (finalAssignees.length > 0) {
-                const personResponse = yield repoClient.rest.pulls.requestReviewers({
+                const personResponse = yield repoClient.rest.issues.addAssignees({
                     owner: issue.owner,
                     repo: issue.repo,
-                    pull_number: issue.number,
-                    reviewers: finalAssignees,
+                    issue_number: issue.number,
+                    assignees: finalAssignees,
                 });
                 console.log("Request Status:" +
                     personResponse.status +
                     ", Assignees from Team " +
                     team +
                     ":" +
-                    ((_b = (_a = personResponse === null || personResponse === void 0 ? void 0 : personResponse.data) === null || _a === void 0 ? void 0 : _a.requested_reviewers) === null || _b === void 0 ? void 0 : _b.map((r) => r.login).join(",")));
+                    ((_b = (_a = personResponse === null || personResponse === void 0 ? void 0 : personResponse.data) === null || _a === void 0 ? void 0 : _a.assignees) === null || _b === void 0 ? void 0 : _b.map((r) => r.login).join(",")));
             }
             else {
                 console.log("No members to assign found in team " + team);

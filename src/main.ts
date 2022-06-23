@@ -46,11 +46,11 @@ export async function run() {
     }
 
     if (finalAssignees.length > 0) {
-      const personResponse = await repoClient.rest.pulls.requestReviewers({
+      const personResponse = await repoClient.rest.issues.addAssignees({
         owner: issue.owner,
         repo: issue.repo,
-        pull_number: issue.number,
-        reviewers: finalAssignees,
+        issue_number: issue.number,
+        assignees: finalAssignees,
       });
       console.log(
         "Request Status:" +
@@ -58,9 +58,7 @@ export async function run() {
           ", Assignees from Team " +
           team +
           ":" +
-          personResponse?.data?.requested_reviewers
-            ?.map((r) => r.login)
-            .join(",")
+          personResponse?.data?.assignees?.map((r) => r.login).join(",")
       );
     } else {
       console.log("No members to assign found in team " + team);
