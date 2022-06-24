@@ -1,7 +1,7 @@
 # Auto Assign Assignees From Team
 
-Assign any amount of members from a given [GitHub Team](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/organizing-members-into-teams) as Assignees to a PR
-Members are chosen randomly
+Assign any amount of members from a given [GitHub Team](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/organizing-members-into-teams) as Assignees to a PR.\
+Members are chosen randomly.
 
 ## Example Usage
 
@@ -12,7 +12,7 @@ on:
     types: [opened, ready_for_review]
 
 jobs:
-  assign-reviewers:
+  assign-assignees:
     runs-on: ubuntu-latest
     steps:
       - name: "Assign assignees from team"
