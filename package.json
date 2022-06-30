@@ -1,6 +1,6 @@
 {
   "name": "auto-assign-assignees-from-team",
-  "version": "1.1.3",
+  "version": "1.1.0",
   "private": true,
   "description": "GitHub Action to assign assignees to a PR from a team",
   "main": "dist/index.js",

@@ -50,18 +50,18 @@ function run() {
             const repoToken = core.getInput("repo-token", { required: true });
             const readToken = core.getInput("read-token", { required: true });
             const team = core.getInput("team");
-            const org = core.getInput("org");
             const amount = parseInt(core.getInput("amount"));
             const issue = github.context.issue;
             if (issue == null || issue.number == null) {
                 console.log("No pull request context, skipping");
                 return;
             }
+            const ghOrg = github.context.repo.owner;
             // See https://octokit.github.io/rest.js/
             const repoClient = github.getOctokit(repoToken);
             const readClient = github.getOctokit(readToken);
             const members = yield readClient.rest.teams.listMembersInOrg({
-                org: org,
+                org: ghOrg,
                 team_slug: team,
             });
             console.log("Request Status for getting team members: " + members.status);

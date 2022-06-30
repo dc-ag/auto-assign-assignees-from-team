@@ -11,9 +11,6 @@ inputs:
   read-token:
       description: "Read only token which needs access to fetch team members"
       required: true
-  org:
-    description: "Organization of the team"
-    required: false
   team:
     description: "Team to chose assignees from"
     required: true
