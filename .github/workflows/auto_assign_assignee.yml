@@ -7,7 +7,7 @@ jobs:
   assign-assignees:
     runs-on: ubuntu-latest
     steps:
-      - uses: dc-ag/auto-assign-assignees-from-team@v1.1.0
+      - uses: dc-ag/auto-assign-assignees-from-team@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           read-token: ${{ secrets.AUTO_ASSIGN_ASSIGNEES_TOKEN }}
